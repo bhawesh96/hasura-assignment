@@ -19,7 +19,7 @@ Work log -
 
  - [x] Understand the problem statement
  - [x] Learn the basics of Compiler Design and concepts like ASTs,  parsing, lexing, tokens etc
- - [ ] Write the Parser
- - [ ] Write the Lexer
+ - [x] Write the Parser
+ - [x] Write the Lexer
  - [ ] Write semantics and validate
  - [ ] Testing
