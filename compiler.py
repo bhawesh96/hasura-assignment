@@ -155,8 +155,31 @@ class Parser:
                 ast_obj.append(f)
         return ast_obj
 
+
 ##
-# Method to generate the PDF file
+# Method to calculate the end_page for each type of image
+def correct_end_page(ast):
+    for index, f in enumerate(ast[:-1]):
+        ast[index].end_page = ast[index+1].init_page - 1
+    return ast
+
+
+##
+# Method to convert the token_type into the corresponding type (int/str etc)
+def convert_tokens_to_var_type(ast):
+    for f in ast:
+        for key in f.__dict__.keys():
+            tok_type = str(f.__dict__[key]).split(':')[0]
+            tok_value = str(f.__dict__[key]).split(':')[1]
+            if tok_type == 'INT':
+                tok_value = int(tok_value)
+            elif tok_type == 'STR':
+                tok_value = str(tok_value)
+            f.__dict__[key] = tok_value
+    return ast
+
+##
+# Method to generate the PDF using pyPDF
 def generate_pdf(ast):
     pass
 
@@ -172,6 +195,8 @@ def main():
     tokens = lexer.make_tokens()  # generate the tokens
     parser = Parser(tokens)  # parse the tokens
     ast = parser.parse()  # get the AST
+    ast = convert_tokens_to_var_type(ast)
+    ast = correct_end_page(ast)
     generate_pdf(ast)  # generate the PDF
 
 main()
