@@ -1,5 +1,7 @@
+import sys
+
 # Define the constants
-TT_INT		= 'INT'
+TT_INT      = 'INT'
 TT_STR      = 'STR'
 TT_LPAREN   = 'LPAREN'
 TT_RPAREN   = 'RPAREN'
@@ -136,6 +138,7 @@ class Parser:
             return ElementNode(tok)
 
     def parse(self):
+        ast_obj = []
         while self.curr_tok.value != None:
             init_page = self.factor_number()
             end_page = self.factor_number()
@@ -148,17 +151,27 @@ class Parser:
                 self.advance()  # skip comma
                 y_pos = self.factor_number()
                 self.advance()  # RPAREN
-            print FlipBook(init_page, end_page, image_file, x_pos, y_pos).__dict__
+                f = FlipBook(init_page, end_page, image_file, x_pos, y_pos)
+                ast_obj.append(f)
+        return ast_obj
+
+##
+# Method to generate the PDF file
+def generate_pdf(ast):
+    pass
 
 ##
 # the main driver function
 def main():
-    with open('input.flip', 'r') as f:
+    input_args = sys.argv
+    input_file = input_args[1]
+    output_pdf_file = input_args[-1]
+    with open(input_file, 'r') as f:
         text = f.read()
     lexer = Lexer(text)  # the lexer object
     tokens = lexer.make_tokens()  # generate the tokens
     parser = Parser(tokens)  # parse the tokens
-    ast = parser.parse()
-    # print ast.__dict__
+    ast = parser.parse()  # get the AST
+    generate_pdf(ast)  # generate the PDF
 
 main()
