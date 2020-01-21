@@ -22,4 +22,7 @@ Work log -
  - [x] Write the Parser
  - [x] Write the Lexer
  - [ ] Write semantics and validate
- - [ ] Testing
+ - [x] Testing
+ - [ ] Write python to generate PDF (PyPDF module)
+
+Note: I've never been introduced to compiler designing earlier in my academics or work profile. Based on my understanding, I've written this Python code.
