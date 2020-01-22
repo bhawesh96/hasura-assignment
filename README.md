@@ -12,8 +12,8 @@ The GoLang implementation makes use of 2 arrays rather than a dictionary.
 
 ## Flipbook
 This problem statement requires one to design a compiler. I've chosen to write it in Python.
-
-Status: In progress
+Status: Done
+Usage: python compiler.py input.flip -o output.pdf
 
 Work log - 
 
@@ -21,8 +21,8 @@ Work log -
  - [x] Learn the basics of Compiler Design and concepts like ASTs,  parsing, lexing, tokens etc
  - [x] Write the Parser
  - [x] Write the Lexer
- - [ ] Write semantics and validate
  - [x] Testing
- - [ ] Write python to generate PDF (PyPDF module)
+ - [x] Write python to generate PDF (fpdf module)
+ - [ ] Write semantics and validate
 
 Note: I've never been introduced to compiler designing earlier in my academics or work profile. Based on my understanding, I've written this Python code.
