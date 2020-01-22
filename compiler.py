@@ -1,4 +1,5 @@
 import sys
+from fpdf import FPDF
 
 # Define the constants
 TT_INT      = 'INT'
@@ -158,7 +159,7 @@ class Parser:
 
 ##
 # Method to calculate the end_page for each type of image
-def correct_end_page(ast):
+def calculate_end_page(ast):
     for index, f in enumerate(ast[:-1]):
         ast[index].end_page = ast[index+1].init_page - 1
     return ast
@@ -180,8 +181,13 @@ def convert_tokens_to_var_type(ast):
 
 ##
 # Method to generate the PDF using pyPDF
-def generate_pdf(ast):
-    pass
+def generate_pdf(ast, output_pdf_file):
+    pdf = FPDF()
+    for item in ast:
+        for page in range(item.init_page, item.end_page):
+            pdf.add_page()  # add a page
+            pdf.image(item.image_file, x=item.x_pos, y=item.y_pos, w=100)  # insert the image at required position
+    pdf.output(output_pdf_file)
 
 ##
 # the main driver function
@@ -196,7 +202,7 @@ def main():
     parser = Parser(tokens)  # parse the tokens
     ast = parser.parse()  # get the AST
     ast = convert_tokens_to_var_type(ast)
-    ast = correct_end_page(ast)
-    generate_pdf(ast)  # generate the PDF
+    ast = calculate_end_page(ast)  # calculate the end_page for each type
+    generate_pdf(ast, output_pdf_file)  # generate the PDF
 
 main()
