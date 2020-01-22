@@ -91,7 +91,8 @@ class Lexer:
             self.advance()
         return Token(TT_STR, image_file_str)
 
-
+##
+# Class to define the Flipbook
 class FlipBook:
     def __init__(self, init_page, end_page, image_file, x_pos, y_pos):
         self.init_page = init_page
@@ -99,6 +100,7 @@ class FlipBook:
         self.image_file = image_file
         self.x_pos = x_pos
         self.y_pos = y_pos
+
 
 class ElementNode:
     def __init__(self, tok):
@@ -179,15 +181,17 @@ def convert_tokens_to_var_type(ast):
             f.__dict__[key] = tok_value
     return ast
 
+
 ##
 # Method to generate the PDF using pyPDF
 def generate_pdf(ast, output_pdf_file):
     pdf = FPDF()
     for item in ast:
-        for page in range(item.init_page, item.end_page):
+        for page in range(item.init_page, item.end_page+1):
             pdf.add_page()  # add a page
             pdf.image(item.image_file, x=item.x_pos, y=item.y_pos, w=100)  # insert the image at required position
     pdf.output(output_pdf_file)
+
 
 ##
 # the main driver function
@@ -204,5 +208,6 @@ def main():
     ast = convert_tokens_to_var_type(ast)
     ast = calculate_end_page(ast)  # calculate the end_page for each type
     generate_pdf(ast, output_pdf_file)  # generate the PDF
+
 
 main()
