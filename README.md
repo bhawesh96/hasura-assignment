@@ -1,8 +1,10 @@
 
+
 # Hasura-Assignment
 This repository is created to make the submission of the problem statements/assignment.
 
 ## Multiples
+**Status**: Done
 Following is the logic for Python implementation-
 1. Input n, m.
 2. Input magic-number and corresponding substitute in key-value form in a dictionary.
@@ -12,8 +14,9 @@ The GoLang implementation makes use of 2 arrays rather than a dictionary.
 
 ## Flipbook
 This problem statement requires one to design a compiler. I've chosen to write it in Python.
-Status: Done
-Usage: python compiler.py input.flip -o output.pdf
+
+**Status**: Done
+**Usage**: `python compiler.py input.flip -o output.pdf`
 
 Work log - 
 
